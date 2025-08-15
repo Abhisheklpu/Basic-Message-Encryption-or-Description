@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Message Encryptor/Decryptor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .section {
+            background: white;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            resize: vertical;
+        }
+
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        button:hover {
+            background: #45a049;
+        }
+
+        .output {
+            margin-top: 10px;
+            padding: 10px;
+            background: #f8f8f8;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            min-height: 40px;
+            word-break: break-all;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                flex-direction: row;
+            }
+            
+            .section {
+                flex: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Message Encryptor/Decryptor</h1>
+    <div class="container">
+        <div class="section">
+            <h2>Encryption</h2>
+            <textarea id="encryptInput" placeholder="Enter your message to encrypt..."></textarea>
+            <button onclick="encryptMessage()">Encrypt</button>
+            <button onclick="clearEncrypt()">Clear</button>
+            <div class="output" id="encryptOutput"></div>
+        </div>
+        
+        <div class="section">
+            <h2>Decryption</h2>
+            <textarea id="decryptInput" placeholder="Enter your encrypted message to decrypt..."></textarea>
+            <button onclick="decryptMessage()">Decrypt</button>
+            <button onclick="clearDecrypt()">Clear</button>
+            <div class="output" id="decryptOutput"></div>
+        </div>
+    </div>
+
+    <script>
+        function encryptMessage() {
+            const input = document.getElementById('encryptInput').value;
+            if (!input) {
+                alert('Please enter a message to encrypt');
+                return;
+            }
+            const encrypted = btoa(input);
+            document.getElementById('encryptOutput').textContent = encrypted;
+        }
+
+        function decryptMessage() {
+            const input = document.getElementById('decryptInput').value;
+            if (!input) {
+                alert('Please enter a message to decrypt');
+                return;
+            }
+            try {
+                const decrypted = atob(input);
+                document.getElementById('decryptOutput').textContent = decrypted;
+            } catch (error) {
+                alert('Invalid encrypted message. Please check your input.');
+            }
+        }
+
+        function clearEncrypt() {
+            document.getElementById('encryptInput').value = '';
+            document.getElementById('encryptOutput').textContent = '';
+        }
+
+        function clearDecrypt() {
+            document.getElementById('decryptInput').value = '';
+            document.getElementById('decryptOutput').textContent = '';
+        }
+    </script>
+</body>
+</html> 
